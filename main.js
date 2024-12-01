@@ -68,7 +68,7 @@ scene.add(cubeCamera);
 // Load 3D logo model
 const loader = new GLTFLoader();
 loader.load(
-  '/logo.glb',
+  './logo.glb',
   (gltf) => {
     const logo = gltf.scene;
     logo.scale.set(0.14, 0.14, 0.14);
