@@ -96,7 +96,7 @@ loader.load('/logo.glb', (gltf) => {
         color: 0x0f0f0f,
         metalness: 0,
         roughness: 0, // Smooth surface
-        transmission: 30, // Fully transparent
+        transmission: 25, // Fully transparent
         thickness: 1, // Refraction thickness
         clearcoat: 1, // Glossy surface
         envMapIntensity: 2, // Control the intensity of the reflection
@@ -133,6 +133,7 @@ controls.enableDamping = true;
 controls.dampingFactor = 0.05;
 controls.enableZoom = true;
 
+
 // Animation loop
 function animate() {
   requestAnimationFrame(animate);
@@ -140,3 +141,27 @@ function animate() {
   renderer.render(scene, camera);
 }
 animate();
+
+// Add the guide message element
+const guideMessage = document.createElement('div');
+guideMessage.className = 'guide-message';
+guideMessage.textContent = 'Try scrolling or click + dragging';
+document.body.appendChild(guideMessage);
+
+// Function to flash the message
+function flashGuideMessage(element, flashes, interval) {
+  let count = 0; // Number of flashes
+  const flashInterval = setInterval(() => {
+    // Toggle the 'visible' class
+    element.classList.toggle('visible');
+    count++;
+
+    // Stop flashing after the desired number of flashes
+    if (count >= flashes * 2) {
+      clearInterval(flashInterval);
+      element.remove(); // Remove the message after flashing
+    }
+  }, interval);
+}
+
+flashGuideMessage(guideMessage, 7, 1000);
