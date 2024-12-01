@@ -1,16 +1,14 @@
 .guide-message {
-    position: fixed;
-    font-family: "Optimist", sans-serif;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: rgba(0, 0, 0, 0.41);
-    font-size: 1rem;
-    opacity: 0; /* Initially hidden */
-    transition: opacity 1s ease-in-out; /* Smooth fading effect */
-  }
-  
-  .guide-message.visible {
-    opacity: 1; /* Fully visible */
-  }
-  
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: gray;
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.guide-message.visible {
+  opacity: 1;
+}
