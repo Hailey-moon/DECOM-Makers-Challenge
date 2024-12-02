@@ -20,7 +20,7 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
   updateCanvas();
-  location.reload();
+  location.reload;
 });
 
 // Canvas for background texture
@@ -30,24 +30,33 @@ const textTexture = new THREE.CanvasTexture(canvas);
 textTexture.wrapS = THREE.RepeatWrapping;
 textTexture.wrapT = THREE.RepeatWrapping;
 
-// Update canvas content dynamically
+// Function to apply themes
+function applyTheme(theme) {
+  // Update canvas background and text color
+  ctx.fillStyle = theme === 'dark-mode' ? 'white' : 'black';
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = theme === 'dark-mode' ? 'white' : 'black';
+  ctx.font = `${Math.min(window.innerWidth / 7, 50)}px Optimist`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText("what's  in  your  wallet ?", window.innerWidth / 2, window.innerHeight / 2);
+  textTexture.needsUpdate = true;
+
+  // Update the 3D logo material
+  scene.traverse((child) => {
+    if (child.isMesh && child.material) {
+      child.material.color.set(theme === 'dark-mode' ? 0xffffff : 0x0f0f0f); // Light or dark color
+    }
+  });
+}
+
+// Function to update the canvas texture
 function updateCanvas() {
   const dpr = window.devicePixelRatio || 1;
   canvas.width = window.innerWidth * dpr;
   canvas.height = window.innerHeight * dpr;
   ctx.scale(dpr, dpr);
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = 'white';
-  ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
-
-  ctx.fillStyle = 'black';
-  ctx.font = `${Math.min(window.innerWidth / 7, 50)}px Optimist`;
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText("what's  in  your  wallet ?", window.innerWidth / 2, window.innerHeight / 2);
-
-  textTexture.needsUpdate = true;
 }
 
 scene.background = textTexture;
@@ -67,6 +76,7 @@ scene.add(cubeCamera);
 
 // Load 3D logo model
 const loader = new GLTFLoader();
+let logoMaterial;
 loader.load(
   './logo.glb',
   (gltf) => {
@@ -74,7 +84,7 @@ loader.load(
     logo.scale.set(0.14, 0.14, 0.14);
     logo.rotation.x = 1.8;
 
-    const logoMaterial = new THREE.MeshPhysicalMaterial({
+    logoMaterial = new THREE.MeshPhysicalMaterial({
       color: 0x0f0f0f,
       roughness: 0,
       transmission: 25,
@@ -144,9 +154,12 @@ function flashGuideMessage(element, flashes, interval) {
 
 flashGuideMessage(guideMessage, 7, 1000);
 
-// Dark mode
+// Dark mode button
+const themeToggleButton = document.createElement('button');
+themeToggleButton.id = 'theme-toggle';
+themeToggleButton.textContent = 'Switch to Dark Mode';
+document.body.appendChild(themeToggleButton);
 
-const themeToggleButton = document.getElementById('theme-toggle');
 const body = document.body;
 
 // Check and apply saved theme on page load
@@ -155,6 +168,7 @@ if (savedTheme) {
   body.classList.add(savedTheme);
   themeToggleButton.textContent =
     savedTheme === 'dark-mode' ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+  applyTheme(savedTheme);
 }
 
 // Toggle theme on button click
@@ -167,5 +181,9 @@ themeToggleButton.addEventListener('click', () => {
     : 'Switch to Dark Mode';
 
   // Save the selected theme to localStorage
-  localStorage.setItem('theme', isDarkMode ? 'dark-mode' : '');
+  const theme = isDarkMode ? 'dark-mode' : '';
+  localStorage.setItem('theme', theme);
+
+  // Apply the selected theme
+  applyTheme(theme);
 });
