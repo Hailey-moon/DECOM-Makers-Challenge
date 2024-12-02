@@ -144,6 +144,8 @@ function flashGuideMessage(element, flashes, interval) {
 
 flashGuideMessage(guideMessage, 7, 1000);
 
+// Dark mode
+
 const themeToggleButton = document.getElementById('theme-toggle');
 const body = document.body;
 
