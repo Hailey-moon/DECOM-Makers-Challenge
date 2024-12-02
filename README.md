@@ -3,7 +3,7 @@
 
 This project showcases **Card Tech+**'s logo reimagined as a captivating 3D interactive experience. Whether you prefer to sit back and admire its smooth rotation or take control spin it out crazy, this project is designed to be immersive and engaging.
 
-**Explore. Interact. Zoom in and out. It's all in your hands.** 🖱️
+**Explore. Interact. Zoom in and out. It's all in your hands right here: https://hailey-moon.github.io/DECOM-Makers-Challenge/** 
 
 
 # 🚀 How I Made This
