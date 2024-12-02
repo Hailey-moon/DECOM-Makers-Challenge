@@ -3,7 +3,7 @@
         "dev": "vite",
         "build": "vite build",
         "deploy": "gh-pages -d dist"
-    },
+    } ,
     "homepage": "https://github.com/Hailey-moon/DECOM-Makers-Challenge",
     "devDependencies": {
         "gh-pages": "^6.2.0",
