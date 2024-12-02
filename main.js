@@ -143,3 +143,27 @@ function flashGuideMessage(element, flashes, interval) {
 }
 
 flashGuideMessage(guideMessage, 7, 1000);
+
+const themeToggleButton = document.getElementById('theme-toggle');
+const body = document.body;
+
+// Check and apply saved theme on page load
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+  body.classList.add(savedTheme);
+  themeToggleButton.textContent =
+    savedTheme === 'dark-mode' ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+}
+
+// Toggle theme on button click
+themeToggleButton.addEventListener('click', () => {
+  const isDarkMode = body.classList.toggle('dark-mode');
+
+  // Update button text
+  themeToggleButton.textContent = isDarkMode
+    ? 'Switch to Light Mode'
+    : 'Switch to Dark Mode';
+
+  // Save the selected theme to localStorage
+  localStorage.setItem('theme', isDarkMode ? 'dark-mode' : '');
+});

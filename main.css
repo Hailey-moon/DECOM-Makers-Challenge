@@ -13,3 +13,21 @@
 .guide-message.visible {
   opacity: 1;
 }
+
+:root {
+  /* Light mode colors */
+  --bg-color: white;
+  --text-color: black;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+  /* Dark mode colors */
+  --bg-color: black;
+  --text-color: white;
+}
