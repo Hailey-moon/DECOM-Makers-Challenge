@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DirectionalLight } from 'three/build/three.cjs';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 // Setup Scene, Camera, Renderer
@@ -32,8 +33,7 @@ textTexture.wrapT = THREE.RepeatWrapping;
 
 // Function to apply themes
 function applyTheme(theme) {
-  // Update canvas background and text color
-  ctx.fillStyle = theme === 'dark-mode' ? 'white' : 'black';
+  ctx.fillStyle = theme === 'dark-mode' ? 'black' : 'white';
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = theme === 'dark-mode' ? 'white' : 'black';
@@ -46,7 +46,7 @@ function applyTheme(theme) {
   // Update the 3D logo material
   scene.traverse((child) => {
     if (child.isMesh && child.material) {
-      child.material.color.set(theme === 'dark-mode' ? 0xffffff : 0x0f0f0f); // Light or dark color
+      child.material.color.set(theme === 'dark-mode' ? 0xffffff : 0x000000); // Light or dark color
     }
   });
 }
