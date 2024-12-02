@@ -38,10 +38,10 @@ function updateCanvas() {
   ctx.scale(dpr, dpr);
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = 'black';
+  ctx.fillStyle = 'white';
   ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
-  ctx.fillStyle = 'white';
+  ctx.fillStyle = 'black';
   ctx.font = `${Math.min(window.innerWidth / 7, 50)}px Optimist`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
@@ -81,13 +81,13 @@ loader.load(
       color: 0x000000,
       roughness: 0,
       transmission: 1,
-      thickness: 0.5,
+      thickness: 1,
       clearcoat: 1,
       envMap: cubeRenderTarget.texture,
       envMapIntensity: 1,
       ior: 1,
       iridescence: 1,
-      iridescenceIOR: 4,
+      iridescenceIOR: 1,
       specularIntensity: 1,
     });
 
